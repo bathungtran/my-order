@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor">
+       <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/toolBarColor">
+           <RelativeLayout
+               android:id="@+id/rlToolBar"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:paddingTop="10dp">
+               <SearchView
+                   android:closeIcon="@drawable/closeicon"
+                   android:id="@+id/sevMain_Restaurant"
+                   android:layout_width="240dp"
+                   android:layout_height="35dp"
+                   android:layoutDirection="rtl"
+                   android:layout_marginLeft="10dp"
+                   android:queryHint="Search...">
+               </SearchView>
+               <TextView
+                   android:drawableTop="@drawable/icon_main_user"
+                   android:layout_toRightOf="@id/sevMain_Restaurant"
+                   android:id="@+id/txtMain_HelloUser"
+                   android:layout_marginLeft="20dp"
+                   android:layout_marginRight="5dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:text="HungTran"
+                   android:textAlignment="center"
+                   android:textSize="15sp"
+                   android:textColor="#ffffff"
+                   android:background="@drawable/ripple_effect"/>
+
+           </RelativeLayout>
+
+       </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+           <RelativeLayout
+               android:orientation="horizontal"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="#F9690E">
+
+               <Switch
+                   android:id="@+id/sw_near_by"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentEnd="true"
+                   android:layout_alignParentTop="true"
+                   android:layout_marginEnd="15dp"
+                   android:text="Near by "
+                   android:textColor="#fff" />
+           </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/revRestaurant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="25dp"
+                android:background="@color/recyclerviewColor">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:id="@+id/prbLoadData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminateDrawable="@drawable/progressdrawable"
+                />
+        </RelativeLayout>
+
+
+</LinearLayout>

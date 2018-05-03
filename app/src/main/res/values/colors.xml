@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="searchBar">#faa200</color>
+    <color name="transparent">#00000000</color>
+    <color name="loginButton">#e2ec13f4</color>
+    <color name="edtColor">#c8bdbdbd</color>
+    <color name="customGreen">#36cc08</color>
+    <color name="customOrange">#FF5722</color>
+    <color name="customGrey">#212121</color>
+    <color name="toolBarColor">#FF5722</color>
+    <color name="recyclerviewColor">#ffffff</color>
+    <color name="customLightGray">#c8bdbdbd</color>
+    <color name="BackgroundColor">#fff</color>
+    <color name="restaurantitemcolor">#ffffff</color>
+    <color name="restaurantitemdividercolor">#bfbfbf</color>
+    <color name="buttonripplecolor">#bfbfbf</color>
+    <color name="restaurantitemripplecolor">#bfbfbf</color>
+</resources>

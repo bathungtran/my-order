@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:background="@color/BackgroundColor">
+
+    <ImageView
+        android:id="@+id/logoLogin"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/app_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:inputType="text"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/logoLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_edt"
+        android:hint="Username"
+        android:textAlignment="center"
+        android:textColorHint="#eee"
+        android:textColor="#fff"
+        android:drawableLeft="@drawable/icon_username"/>
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:inputType="textPassword"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/edtUsername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_edt"
+        android:hint="Password"
+        android:textAlignment="center"
+        android:textColorHint="#eee"
+        android:textColor="#fff"
+        android:drawableLeft="@drawable/icon_password"/>
+
+    <CheckBox
+        android:id="@+id/cbRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnLogin"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="18dp"
+        android:text="Remember me"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/edtPassword"
+        android:layout_below="@+id/cbRememberMe"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/button_effect"
+        android:text="Login"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/ripple_effect"
+        android:text="Don't have an account? Register now"
+        android:textSize="16sp" />
+
+</RelativeLayout>

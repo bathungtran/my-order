@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/item_menu_frame"
+    android:backgroundTint="@color/edtColor"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/img_itemImage"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/txt_itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_itemImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Name:"
+
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/customGrey"/>
+    <TextView
+        android:id="@+id/txt_itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/img_itemImage"
+        android:layout_below="@id/txt_itemName"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Price:"
+
+        android:textSize="16dp"
+        android:textColor="@color/customGrey"/>
+
+    <EditText
+        android:id="@+id/edt_itemNumber"
+        android:layout_width="42dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/img_itemImage"
+        android:layout_alignStart="@+id/txt_itemPrice"
+        android:background="@drawable/rounded_edt"
+        android:backgroundTint="@color/customLightGray"
+        android:inputType="numberDecimal"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textColor="@color/customGrey"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/btn_deleteButton"
+        android:layout_width="68dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/btn_orderButton"
+        android:layout_toStartOf="@+id/btn_orderButton"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/customOrange"
+        android:text="-"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btn_orderButton"
+        android:layout_width="68dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/edt_itemNumber"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/customGreen"
+        android:text="+"
+        android:textSize="20dp"/>
+
+</RelativeLayout>
