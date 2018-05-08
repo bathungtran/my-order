@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -150,8 +152,7 @@ public class InformationActivity extends AppCompatActivity {
             try {
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(ORDER_URL);
-                StringEntity se = new StringEntity(body[0].toString());
-                se.setContentEncoding("UTF-8");
+                StringEntity se = new StringEntity(body[0].toString(),"UTF-8");
                 se.setContentType("application/json");
                 post.setEntity(se);
                 HttpResponse response = client.execute(post);
