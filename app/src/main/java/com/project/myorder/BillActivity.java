@@ -17,12 +17,12 @@ public class BillActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ListView listView;
     private TextView txtTotal ;
-
+    int customerId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
-
+        getDataFromMenu();
         mOkBill = (Button) findViewById(R.id.btn_ok_bill);
         btnBack =(ImageButton)findViewById(R.id.btnBill_Back);
         txtTotal =(TextView)findViewById(R.id.txtTotal);
@@ -49,8 +49,13 @@ public class BillActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BillActivity.this,InformationActivity.class);
+                intent.putExtra("CUSTOMER_ID",customerId);
                 startActivity(intent);
             }
         });
+    }
+    private void getDataFromMenu(){
+        Intent i = getIntent();
+        customerId = i.getIntExtra("CUSTOMER_ID",0);
     }
 }

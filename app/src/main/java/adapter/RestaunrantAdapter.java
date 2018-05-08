@@ -28,11 +28,12 @@ public class RestaunrantAdapter extends RecyclerView.Adapter<RestaurantViewHolde
     private List<RestaurantModel> restaurantModelArrayList, filterList;
     private Context context;
     private RestaurantFilter restaurantFilter;
-
-    public RestaunrantAdapter(List<RestaurantModel> restaurantModelArrayList, Context context) {
+    private int customerId;
+    public RestaunrantAdapter(List<RestaurantModel> restaurantModelArrayList, Context context,int customerId) {
         this.restaurantModelArrayList = restaurantModelArrayList;
         this.context = context;
         this.filterList= restaurantModelArrayList;
+        this.customerId = customerId;
     }
 
 
@@ -68,6 +69,7 @@ public class RestaunrantAdapter extends RecyclerView.Adapter<RestaurantViewHolde
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("RES_NAME", restaurantModelArrayList.get(pos).getResName());
         i.putExtra("RES_ID", restaurantModelArrayList.get(pos).getResId());
+        i.putExtra("CUSTOMER_ID",customerId);
         System.out.println("RES_ID_HOME: "+ restaurantModelArrayList.get(pos).getResId());
         context.startActivity(i);
     }

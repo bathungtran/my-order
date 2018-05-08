@@ -44,7 +44,7 @@ public class Menu extends AppCompatActivity {
     RecyclerView recyclerView;
     public static int RES_ID=0;
     private static String serverURL="http://35.189.23.244:8080/";
-
+    int customerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class Menu extends AppCompatActivity {
         Intent i = getIntent();
         String resName = i.getStringExtra("RES_NAME");
         RES_ID = i.getIntExtra("RES_ID",0);
+        customerId = i.getIntExtra("CUSTOMER_ID",0);
         System.out.println("RES_NAME: "+resName);
         System.out.println("RES_ID: "+RES_ID);
         getSupportActionBar().setTitle(resName);
@@ -103,6 +104,7 @@ public class Menu extends AppCompatActivity {
                 return true;
             }
             Intent i = new Intent(this,BillActivity.class);
+            i.putExtra("CUSTOMER_ID",customerId);
             startActivity(i);
         }
         if (item.getItemId() == android.R.id.home) {

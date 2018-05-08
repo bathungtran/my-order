@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import adapter.RestaunrantAdapter;
+import model.CustomerModel;
 import model.RestaurantModel;
 import utils.DataParser;
 import utils.DownloadURL;
@@ -58,10 +59,12 @@ public class Home extends Activity {
     double latitude, longitude;
     private List<HashMap<String, String>> nearbyPlaceList;
     private List<RestaurantModel> restaurantModelList;
+    String user;
+    int customerId;
     NetworkReceiver receiver;
     private static String serverURL="http://35.189.23.244:8080/";
     private static String API_KEY="AIzaSyBZ8xvu_-TXtnME5l40ACe_A3UwMzQw-64";
-
+    private static String ORDER_RECORDS = "http://35.189.23.244:8080/customer/customers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class Home extends Activity {
         recyclerView = findViewById(R.id.revRestaurant);
         txtHelloUser = findViewById(R.id.txtMain_HelloUser);
         final Intent intent = getIntent();
-        String user = intent.getStringExtra("USERNAME");
+        user = intent.getStringExtra("USERNAME");
         txtHelloUser.setText(user);
         txtHelloUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +107,7 @@ public class Home extends Activity {
                 LoadData(b);
             }
         });
-
+        new CustomerId().execute(ORDER_RECORDS+"/"+user);
 
     }
 
@@ -318,7 +321,8 @@ public class Home extends Activity {
         progressBar.setVisibility(View.GONE);
         if (!listRestaurant.isEmpty()) {
             // create new adapter for recyclerview and set adapter for view
-            final RestaunrantAdapter restaunrantAdapter = new RestaunrantAdapter(listRestaurant, getApplicationContext());
+            final RestaunrantAdapter restaunrantAdapter = new RestaunrantAdapter(
+                    listRestaurant, getApplicationContext(),customerId);
             recyclerView.setAdapter(restaunrantAdapter);
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -336,5 +340,26 @@ public class Home extends Activity {
             ShowIncreaseRadiusDialog();
         }
     }
+    public class CustomerId extends AsyncTask<String,String,String>{
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            CustomerModel customerModel = new Gson().fromJson(s,CustomerModel.class);
+            customerId = customerModel.getCustomerId();
+            Log.i("CUSTOMER_ID", String.valueOf(customerId));
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            DownloadURL downloadURL = new DownloadURL();
+            String response = null;
+            try {
+                response = downloadURL.readUrl(ORDER_RECORDS+"/"+user);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+    }
 }

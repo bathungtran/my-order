@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,11 +39,13 @@ public class InformationActivity extends AppCompatActivity {
     private EditText editNote;
     private ImageButton btnBack;
     private ProgressDialog progressDialog;
+    int customerId;
     private static final String ORDER_URL="http://35.189.23.244:8080/order/record";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        getDataFromBill();
         order = findViewById(R.id.btn_info_order);
         editName = findViewById(R.id.edt_info_name);
         editPhone = findViewById(R.id.edt_info_phone);
@@ -66,7 +69,11 @@ public class InformationActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void getDataFromBill(){
+        Intent i = getIntent();
+        customerId = i.getIntExtra("CUSTOMER_ID",0);
+        Log.i("CUSTOMER_ID", String.valueOf(customerId));
+    }
     private void Order() {
        String name = editName.getText().toString();
        if(TextUtils.isEmpty(name)){
@@ -96,6 +103,7 @@ public class InformationActivity extends AppCompatActivity {
                     object.put("foodOrder",listFoodName);
                     object.put("phoneNumber",phone);
                     object.put("resOrder",Menu.RES_ID);
+                    object.put("customerId",customerId);
                 } catch (JSONException e) {
                     e.printStackTrace();
 
