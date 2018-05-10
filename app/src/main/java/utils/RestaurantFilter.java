@@ -8,10 +8,6 @@ import java.util.List;
 import adapter.RestaunrantAdapter;
 import model.RestaurantModel;
 
-/**
- * Created by bathu on 11/26/2017.
- */
-
 public class RestaurantFilter extends Filter {
 
     static List<RestaurantModel> restaurantModelCurrentList;

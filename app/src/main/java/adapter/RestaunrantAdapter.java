@@ -19,10 +19,6 @@ import java.util.List;
 import model.RestaurantModel;
 import utils.RestaurantFilter;
 
-/**
- * Created by bathu on 11/25/2017.
- */
-
 public class RestaunrantAdapter extends RecyclerView.Adapter<RestaurantViewHolder> implements Filterable {
 
     private List<RestaurantModel> restaurantModelArrayList, filterList;

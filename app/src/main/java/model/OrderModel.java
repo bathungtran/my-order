@@ -1,11 +1,5 @@
 package model;
 
-import java.io.Serializable;
-
-/**
- * Created by HH on 1/9/2018.
- */
-
 public class OrderModel {
     private String foodName;
     private double foodPrice;

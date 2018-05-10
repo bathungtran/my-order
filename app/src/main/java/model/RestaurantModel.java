@@ -1,9 +1,5 @@
 package model;
 
-/**
- * Created by bathu on 11/25/2017.
- */
-
 public class RestaurantModel {
     private int resId;
     private String resName;

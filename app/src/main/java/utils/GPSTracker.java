@@ -8,11 +8,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
-
-/**
- * Created by bathu on 1/3/2018.
- */
-
 public final class GPSTracker implements LocationListener {
 
     private final Context mContext;

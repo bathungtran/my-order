@@ -10,10 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by bathu on 12/6/2017.
- */
-
 public class DownloadURL {
     public String readUrl(String myUrl) throws IOException
     {

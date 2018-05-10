@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.location.LocationListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -47,7 +45,7 @@ import utils.DataParser;
 import utils.DownloadURL;
 import utils.GPSTracker;
 
-public class Home extends Activity {
+public class RestaurantActivity extends Activity {
     ProgressBar progressBar;
     SearchView searchView;
     Toolbar toolbar;
@@ -244,7 +242,7 @@ public class Home extends Activity {
     }
 
     private void ShowLogoutDialog(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantActivity.this);
         builder.setMessage("Do you want to logout?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -265,7 +263,7 @@ public class Home extends Activity {
     }
 
     private void ShowRequestLocationDialog(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantActivity.this);
         builder.setMessage("Application want to access your location")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -284,7 +282,7 @@ public class Home extends Activity {
     }
 
     private void ShowIncreaseRadiusDialog(){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantActivity.this);
         builder.setMessage("Do you want to increase search radius?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

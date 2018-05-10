@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -25,7 +24,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -121,7 +119,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                    editor.remove("remember");
                    editor.commit();
                }
-               Intent intent =new Intent(getApplicationContext(),Home.class);
+               Intent intent =new Intent(getApplicationContext(),RestaurantActivity.class);
                intent.putExtra("USERNAME",edtUsername.getText().toString());
                startActivity(intent);
                finish();

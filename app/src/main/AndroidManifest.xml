@@ -24,10 +24,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".Home"/>
+        <activity android:name=".RestaurantActivity"/>
         <activity android:name=".Menu"/>
         <activity android:name=".BillActivity"/>
-        <activity android:name=".InformationActivity"/>
+        <activity android:name=".BookInfoActivity"/>
     </application>
 
 </manifest>

@@ -48,7 +48,7 @@ public class BillActivity extends AppCompatActivity {
         mOkBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BillActivity.this,InformationActivity.class);
+                Intent intent = new Intent(BillActivity.this,BookInfoActivity.class);
                 intent.putExtra("CUSTOMER_ID",customerId);
                 startActivity(intent);
             }

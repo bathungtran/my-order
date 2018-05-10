@@ -18,14 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +30,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import model.OrderModel;
 
-public class InformationActivity extends AppCompatActivity {
+public class BookInfoActivity extends AppCompatActivity {
     private Button order;
     private EditText editName;
     private EditText editPhone;
@@ -129,7 +126,7 @@ public class InformationActivity extends AppCompatActivity {
             super.onPostExecute(s);
             hideDialog();
             if(s==HttpsURLConnection.HTTP_CREATED){
-                final AlertDialog.Builder builder = new android.app.AlertDialog.Builder(InformationActivity.this);
+                final AlertDialog.Builder builder = new android.app.AlertDialog.Builder(BookInfoActivity.this);
                 builder.setMessage("Order successfully!")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

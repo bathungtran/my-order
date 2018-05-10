@@ -13,9 +13,6 @@ import java.util.List;
 
 import model.OrderModel;
 
-/**
- * Created by HH on 1/9/2018.
- */
 
 public class BillAdapter extends BaseAdapter {
     private Context context;

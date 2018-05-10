@@ -1,9 +1,5 @@
 package model;
 
-/**
- * Created by nmdli on 25-Nov-17.
- */
-
 public class FoodModel {
     private int foodId;
     private String foodName;

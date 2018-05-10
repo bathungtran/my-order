@@ -7,11 +7,6 @@ import android.widget.TextView;
 
 import com.project.myorder.R;
 
-
-/**
- * Created by bathu on 11/26/2017.
- */
-
 public class RestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     TextView txtRestaurantName,txtRestaurantAddress,txtRestaurantDiscription;

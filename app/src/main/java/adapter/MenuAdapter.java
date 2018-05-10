@@ -20,12 +20,6 @@ import java.util.List;
 import model.FoodModel;
 import model.OrderModel;
 
-/**
- * Created by nmdli on 25-Nov-17.
- * Adapter for RecyclerView in Menu screen
- */
-
-
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.RecyclerViewHolder>{
 
     private List<FoodModel> foodModels = new ArrayList<>();
