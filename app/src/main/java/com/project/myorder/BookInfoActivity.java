@@ -92,7 +92,7 @@ public class BookInfoActivity extends AppCompatActivity {
        String note = editNote.getText().toString();
         if(isOnline()){
                String listFoodName="";
-               for(OrderModel model: Menu.orderLists){
+               for(OrderModel model: MenuActivity.orderLists){
                    listFoodName+=model.getFoodName()+",";
                }
                 JSONObject object = new JSONObject();
@@ -101,7 +101,7 @@ public class BookInfoActivity extends AppCompatActivity {
                     object.put("address",address);
                     object.put("foodOrder",listFoodName);
                     object.put("phoneNumber",phone);
-                    object.put("resOrder",Menu.RES_ID);
+                    object.put("resOrder", MenuActivity.RES_ID);
                     object.put("customerId",customerId);
                 } catch (JSONException e) {
                     e.printStackTrace();

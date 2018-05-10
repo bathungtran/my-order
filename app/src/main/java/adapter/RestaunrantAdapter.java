@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
-import com.project.myorder.Menu;
+import com.project.myorder.MenuActivity;
 import com.project.myorder.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.RestaurantModel;
@@ -61,7 +60,7 @@ public class RestaunrantAdapter extends RecyclerView.Adapter<RestaurantViewHolde
     }
 
     private void changeIntent(int pos) {
-        Intent i = new Intent(context,Menu.class);
+        Intent i = new Intent(context,MenuActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("RES_NAME", restaurantModelArrayList.get(pos).getResName());
         i.putExtra("RES_ID", restaurantModelArrayList.get(pos).getResId());

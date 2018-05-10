@@ -7,23 +7,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -36,7 +28,7 @@ import model.OrderModel;
 import utils.DownloadURL;
 
 
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     private List<FoodModel> data = new ArrayList<FoodModel>();
     public static List<OrderModel> orderLists = new ArrayList<>();
@@ -93,7 +85,7 @@ public class Menu extends AppCompatActivity {
         if (item.getItemId() == R.id.done) {
             if(orderLists.isEmpty())
             {
-                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Menu.this);
+                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MenuActivity.this);
                 builder.setMessage("Oops! Your cart is empty!")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

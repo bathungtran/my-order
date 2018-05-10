@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.myorder.Menu;
+import com.project.myorder.MenuActivity;
 import com.project.myorder.R;
 import com.squareup.picasso.Picasso;
 
@@ -80,8 +80,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.RecyclerViewHo
 
         @Override
         public void onClick(View v) {
-            if (Menu.orderLists.contains(model)) {
-                Menu.orderLists.remove(model);
+            if (MenuActivity.orderLists.contains(model)) {
+                MenuActivity.orderLists.remove(model);
             }
             //set action for button here
             int itemNum = Integer.parseInt(itemNumber.getText().toString());
@@ -103,9 +103,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.RecyclerViewHo
             }
             model=new OrderModel(name.getText().toString(),Double.valueOf(price.getText().toString()),itemNum);
             if(model.getQuantity()>0) {
-                Menu.orderLists.add(model);
+                MenuActivity.orderLists.add(model);
             }else {
-                Menu.orderLists.remove(model);
+                MenuActivity.orderLists.remove(model);
             }
         }
     }

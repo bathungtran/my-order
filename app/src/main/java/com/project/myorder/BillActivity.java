@@ -34,12 +34,12 @@ public class BillActivity extends AppCompatActivity {
             }
         });
         listView = (ListView)findViewById(R.id.lvOrderList);
-        BillAdapter adapter = new BillAdapter(getApplicationContext(),Menu.orderLists);
+        BillAdapter adapter = new BillAdapter(getApplicationContext(), MenuActivity.orderLists);
         listView.setAdapter(adapter);
 
         Double total =0.0;
-        for(int i=0;i<Menu.orderLists.size();i++){
-            total+=Menu.orderLists.get(i).getAmount();
+        for(int i = 0; i< MenuActivity.orderLists.size(); i++){
+            total+= MenuActivity.orderLists.get(i).getAmount();
         }
         txtTotal.setText(total+"");
         orderSuccess();
