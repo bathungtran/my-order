@@ -1,6 +1,10 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +52,16 @@ public class BillAdapter extends BaseAdapter {
         TextView textAmount = (TextView) view.findViewById(R.id.txt_bill_amount);
 
         OrderModel orderModel = modelList.get(i);
+        String cut;
         txtName.setText(orderModel.getFoodName());
-        textPrice.setText(orderModel.getFoodPrice()+"");
+        txtName.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+
+        textPrice.setText(String.format("%.0f",orderModel.getFoodPrice()));
+        textPrice.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
         textQuantity.setText(orderModel.getQuantity()+"");
-        textAmount.setText(orderModel.getAmount()+"");
+        textQuantity.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+        textAmount.setText(String.format("%.0f",orderModel.getAmount()));
+        textAmount.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
         return view;
     }
 }

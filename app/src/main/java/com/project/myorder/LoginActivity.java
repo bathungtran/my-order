@@ -1,6 +1,7 @@
 package com.project.myorder;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.transition.Explode;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -44,6 +49,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        transitionEffect();
         sharedPreferences = getSharedPreferences("dataLogin",MODE_PRIVATE);
         edtUsername = (EditText) findViewById(R.id.edtUsername);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
@@ -70,12 +76,19 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void transitionEffect() {
+        Explode explode = new Explode();
+        getWindow().setExitTransition(explode);
+        getWindow().setReenterTransition(explode);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnRegister:
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this);
+                startActivity(i,options.toBundle());
                 finish();
                 break;
             case R.id.btnLogin:
@@ -98,7 +111,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
-
+    //Api request login
     class CallApi extends AsyncTask<JSONObject, Integer, Integer> {
 
         @Override
@@ -137,8 +150,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 HttpConnectionParams.setConnectionTimeout(httpParams, 10000);
                 HttpClient client = new DefaultHttpClient(httpParams);
                 HttpPost post = new HttpPost(LOGIN_URL);
-                StringEntity se = new StringEntity(body[0].toString());
-                se.setContentEncoding("UTF-8");
+                StringEntity se = new StringEntity(body[0].toString(),"UTF-8");
                 se.setContentType("application/json");
                 post.setEntity(se);
                 HttpResponse response = client.execute(post);
@@ -158,13 +170,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
     }
-
+    //check connection
     private boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
+    //create login json format
     private void Login(String userName, String password){
         JSONObject json = new JSONObject();
         try {
@@ -178,6 +191,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         showDialog();
         new CallApi().execute(json);
     }
+    //check username is already exist
     private void CheckLogin(){
         String userName =sharedPreferences.getString("userName","");
         String password =sharedPreferences.getString("password","");

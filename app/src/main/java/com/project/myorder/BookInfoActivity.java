@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -18,6 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -25,6 +30,9 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -73,7 +81,10 @@ public class BookInfoActivity extends AppCompatActivity {
         customerId = i.getIntExtra("CUSTOMER_ID",0);
         Log.i("CUSTOMER_ID", String.valueOf(customerId));
     }
+
+    //create order json format and check each field blank or not
     private void Order() {
+
        String name = editName.getText().toString();
        if(TextUtils.isEmpty(name)){
            editName.setError("Please enter your name!");
@@ -84,31 +95,40 @@ public class BookInfoActivity extends AppCompatActivity {
            editPhone.setError("Please enter your phone number!");
            return;
        }
-      String address = editAddress.getText().toString();
+       String address = editAddress.getText().toString();
        if(TextUtils.isEmpty(address)){
            editAddress.setError("Please enter your address!");
            return;
        }
        String note = editNote.getText().toString();
-        if(isOnline()){
-               String listFoodName="";
-               for(OrderModel model: MenuActivity.orderLists){
-                   listFoodName+=model.getFoodName()+",";
-               }
-                JSONObject object = new JSONObject();
-                try {
-                    object.put("customer",name);
-                    object.put("address",address);
-                    object.put("foodOrder",listFoodName);
-                    object.put("phoneNumber",phone);
-                    object.put("resOrder", MenuActivity.RES_ID);
-                    object.put("customerId",customerId);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+       if(isOnline()){
+           String listFoodName="";
+           for(OrderModel model: MenuActivity.orderLists){
+               listFoodName+=model.getFoodName()+",";
+           }
+           JSONObject object = new JSONObject();
+           try {
+                object.put("customer",name);
+                object.put("address",address);
+                object.put("foodOrder",listFoodName);
+                object.put("phoneNumber",phone);
+                object.put("resOrder", MenuActivity.RES_ID);
+                object.put("customerId",customerId);
+           } catch (JSONException e) {
+               e.printStackTrace();
+           }
+           SharedPreferences pref= getSharedPreferences("ORDERED",MODE_PRIVATE);
+           Gson gson = new Gson();
+           String str = pref.getString("ORDERED","");
+           Log.i("PREFS",str);
+           Type type = new TypeToken<List<OrderModel>>(){}.getType();
+           List<OrderModel> list =  gson.fromJson(str,type);
+           for(int i =0;i<list.size();i++){
+               Log.i("RETRIEVE_PREFS",list.get(i).getFoodName());
+           }
 
-            }
-            showDialog();
-            new CallApi().execute(object);
+        showDialog();
+        new CallApi().execute(object);
         }
     }
 
@@ -119,6 +139,7 @@ public class BookInfoActivity extends AppCompatActivity {
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
+    //Api request an order record
     class CallApi extends AsyncTask<JSONObject, Integer, Integer> {
 
         @Override

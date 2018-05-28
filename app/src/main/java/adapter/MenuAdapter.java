@@ -40,7 +40,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.RecyclerViewHo
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
 
         holder.name.setText(foodModels.get(position).getFoodName());
-        holder.price.setText(foodModels.get(position).getPrice()+"");
+        holder.price.setText(String.format("%.0f",foodModels.get(position).getPrice()));
         holder.itemNumber.setText("0");
         holder.imageView.setTag(foodModels.get(position).getImage());
         String url = foodModels.get(position).getImage();

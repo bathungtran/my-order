@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/BackgroundColor"
     tools:context="com.project.myorder.BookInfoActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +47,7 @@
                android:layout_marginBottom="15dp"
                android:layout_marginRight="10dp"
                android:text="Name"
+               android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
 
            <EditText
@@ -54,6 +56,7 @@
                android:layout_marginLeft="75dp"
                android:layout_marginBottom="15dp"
                android:textSize="20dp"
+               android:textColor="@color/colorPrimary"
                android:id="@+id/edt_info_name"
                android:singleLine="true" />
        </LinearLayout>
@@ -67,6 +70,7 @@
                android:layout_height="wrap_content"
                android:layout_marginBottom="15dp"
                android:text="Phone number"
+               android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
            <EditText
                android:layout_width="match_parent"
@@ -74,6 +78,7 @@
                android:layout_marginLeft="10dp"
                android:layout_marginBottom="15dp"
                android:textSize="20dp"
+               android:textColor="@color/colorPrimary"
                android:singleLine="true"
                android:id="@+id/edt_info_phone"
                android:inputType="numberDecimal"/>
@@ -89,6 +94,7 @@
                android:layout_height="wrap_content"
                android:layout_marginBottom="15dp"
                android:text="Address"
+               android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
            <EditText
                android:layout_width="match_parent"
@@ -96,6 +102,7 @@
                android:layout_marginBottom="15dp"
                android:layout_marginLeft="65dp"
                android:textSize="20dp"
+               android:textColor="@color/colorPrimary"
                android:id="@+id/edt_info_address"
                android:singleLine="true"/>
        </LinearLayout>
@@ -109,6 +116,7 @@
                android:layout_height="wrap_content"
                android:layout_marginBottom="15dp"
                android:text="Note"
+               android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
            <EditText
                android:layout_width="match_parent"
@@ -116,6 +124,7 @@
                android:layout_marginBottom="15dp"
                android:layout_marginLeft="100dp"
                android:textSize="20dp"
+               android:textColor="@color/colorPrimary"
                android:id="@+id/edt_info_note"
                android:maxLength="84"/>
        </LinearLayout>

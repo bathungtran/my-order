@@ -1,5 +1,6 @@
 package com.project.myorder;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -28,6 +29,7 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -60,6 +62,7 @@ public class RestaurantActivity extends Activity {
     String user;
     int customerId;
     NetworkReceiver receiver;
+    //URL
     private static String serverURL="http://35.189.23.244:8080/";
     private static String API_KEY="AIzaSyBZ8xvu_-TXtnME5l40ACe_A3UwMzQw-64";
     private static String ORDER_RECORDS = "http://35.189.23.244:8080/customer/customers";
@@ -102,7 +105,9 @@ public class RestaurantActivity extends Activity {
         swNearBy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                recyclerView.setVisibility(View.GONE);
                 LoadData(b);
+
             }
         });
         new CustomerId().execute(ORDER_RECORDS+"/"+user);
@@ -123,7 +128,7 @@ public class RestaurantActivity extends Activity {
 
 
     }
-
+    //declare url's element
     private String NearByURL(double latitude, double longitude, String nearbyPlace) {
 
         StringBuilder googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
@@ -139,7 +144,7 @@ public class RestaurantActivity extends Activity {
         return googlePlaceUrl.toString();
     }
 
-
+    //get data from Google Map
     public class GetNearbyPlacesData extends AsyncTask<String, String, String> {
         private String googlePlacesData;
         String url;
@@ -167,6 +172,7 @@ public class RestaurantActivity extends Activity {
 
     }
 
+    //get Restaurant data from server
     public class LoadRestaurantData extends AsyncTask<String, String, String> {
         Boolean nearBy;
 
@@ -204,8 +210,10 @@ public class RestaurantActivity extends Activity {
                         } else {
                             swNearBy.setChecked(false);
                             ShowRequestLocationDialog();
+                            recyclerView.setVisibility(View.VISIBLE);
                         }
                     } else {
+                        recyclerView.setVisibility(View.VISIBLE);
                         ShowListRestaurant(nearBy);
                     }
 
@@ -240,7 +248,7 @@ public class RestaurantActivity extends Activity {
 
         }
     }
-
+    //logout
     private void ShowLogoutDialog(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantActivity.this);
         builder.setMessage("Do you want to logout?")
@@ -300,9 +308,12 @@ public class RestaurantActivity extends Activity {
                 .show();
     }
 
+    //upload list of restaurant
     private void ShowListRestaurant(boolean nearBy) {
+        //create list of Restaurant
         List<RestaurantModel> listRestaurant = new ArrayList<>();
         if (nearBy) {
+            //assign list of restaurant nearby
             if (!nearbyPlaceList.isEmpty()) {
                 for (RestaurantModel model : restaurantModelList) {
                     for (int i = 0; i < nearbyPlaceList.size(); i++) {
@@ -314,6 +325,7 @@ public class RestaurantActivity extends Activity {
                 }
             }
         } else {
+            //if mode nearby doesn't active or there's nothing nearby, use entire list of Restaurant
             listRestaurant = restaurantModelList;
         }
         progressBar.setVisibility(View.GONE);
@@ -338,6 +350,7 @@ public class RestaurantActivity extends Activity {
             ShowIncreaseRadiusDialog();
         }
     }
+    //get customerId
     public class CustomerId extends AsyncTask<String,String,String>{
 
         @Override

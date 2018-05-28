@@ -8,6 +8,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +42,7 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.register);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-
+        transitionEffect();
         inputName = (EditText) findViewById(R.id.edt_name_reg);
         inputPhone = (EditText) findViewById(R.id.edt_phone_reg);
         inputPassword = (EditText) findViewById(R.id.edt_password_reg);
@@ -69,6 +72,15 @@ public class RegisterActivity extends Activity {
         });
     }
 
+    private void transitionEffect() {
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.bigbang);
+        transition.setDuration(500);
+        getWindow().setEnterTransition(transition);
+        getWindow().setReturnTransition(transition);
+
+    }
+
+    //create form and check each field blank or not
     private void submitForm() {
         String name = inputName.getText().toString();
         if(TextUtils.isEmpty(name)){
@@ -97,6 +109,7 @@ public class RegisterActivity extends Activity {
         registerUser(name,phone,password,rePassword);
     }
 
+    //create json register format
     private void registerUser(final String name, final String phone, final String password, final String repassword) {
         progressDialog.setMessage("Register...");
         JSONObject json = new JSONObject();
@@ -123,6 +136,7 @@ public class RegisterActivity extends Activity {
             progressDialog.dismiss();
     }
 
+    //Api request Register
     class CallApi extends AsyncTask<JSONObject, Integer, Integer> {
 
         @Override
@@ -134,20 +148,23 @@ public class RegisterActivity extends Activity {
                 Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                 startActivity(i);
                 finish();
-            }else{
-                Toast.makeText(getApplicationContext(),"Register fail. Try agian!",Toast.LENGTH_SHORT).show();
+            }else if(s==HttpsURLConnection.HTTP_CONFLICT){
+                Toast.makeText(getApplicationContext(),"Register fail. Username has " +
+                        "already been used!",Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(getApplicationContext(),"Register fail. Try again!"
+                        ,Toast.LENGTH_SHORT).show();
             }
 
         }
 
         @Override
         protected Integer doInBackground(JSONObject... body) {
-            int result=0;
+            int result;
             try {
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(REGISTER_URL);
-                StringEntity se = new StringEntity(body[0].toString());
-                se.setContentEncoding("UTF-8");
+                StringEntity se = new StringEntity(body[0].toString(),"UTF-8");
                 se.setContentType("application/json");
                 post.setEntity(se);
                 HttpResponse response = client.execute(post);
@@ -160,6 +177,8 @@ public class RegisterActivity extends Activity {
             return result;
         }
     }
+
+    //check connection
     private boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

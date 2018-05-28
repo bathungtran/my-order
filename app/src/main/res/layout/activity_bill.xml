@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/BackgroundColor"
     tools:context="com.project.myorder.BillActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,24 +42,28 @@
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Name"/>
         <TextView
             android:layout_marginLeft="40dp"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Price"/>
         <TextView
             android:layout_marginLeft="15dp"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Quantity" />
         <TextView
             android:layout_marginLeft="20dp"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:text="Amount"/>
     </LinearLayout>
     <ListView
@@ -71,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:textColor="@color/colorPrimary"
         android:layout_marginBottom="10dp">
         <TextView
             android:layout_width="wrap_content"
@@ -78,11 +84,13 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="Total:"
+            android:textColor="@color/colorPrimary"
             android:textSize="25dp" />
         <TextView
             android:id="@+id/txtTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
             android:textSize="25dp"/>
     </LinearLayout>
 

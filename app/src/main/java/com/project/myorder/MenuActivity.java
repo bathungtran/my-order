@@ -61,7 +61,7 @@ public class MenuActivity extends AppCompatActivity {
         getDataFromHome();
         orderLists.clear();
     }
-
+    //get data from previous activity
     private void getDataFromHome() {
         Intent i = getIntent();
         String resName = i.getStringExtra("RES_NAME");
@@ -83,6 +83,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         if (item.getItemId() == R.id.done) {
+            //check if there is any dish has been selected
             if(orderLists.isEmpty())
             {
                 final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MenuActivity.this);
@@ -122,6 +123,7 @@ public class MenuActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Internet not available",Toast.LENGTH_LONG).show();
         }
     }
+    //get list of menu of each restaurant from server
     public class LoadFoodData extends AsyncTask<Object,String,String> {
         @Override
         protected String doInBackground(Object... objects) {
@@ -142,7 +144,6 @@ public class MenuActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<FoodModel>>(){}.getType();
             data = gson.fromJson(s, listType);
-
             if (!data.isEmpty()) {
                 MenuAdapter menuRecyclerViewAdapter = new MenuAdapter(data,getApplicationContext());
                 recyclerView.setAdapter(menuRecyclerViewAdapter);
