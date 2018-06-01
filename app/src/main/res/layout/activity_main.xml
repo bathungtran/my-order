@@ -23,15 +23,15 @@
                    android:layout_width="240dp"
                    android:layout_height="35dp"
                    android:layoutDirection="rtl"
-                   android:layout_marginLeft="10dp"
+                   android:layout_marginLeft="1dp"
                    android:queryHint="Search...">
                </SearchView>
                <TextView
                    android:drawableTop="@drawable/icon_main_user"
                    android:layout_toRightOf="@id/sevMain_Restaurant"
                    android:id="@+id/txtMain_HelloUser"
-                   android:layout_marginLeft="20dp"
-                   android:layout_marginRight="5dp"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="1dp"
                    android:layout_width="wrap_content"
                    android:layout_height="match_parent"
                    android:text="HungTran"
@@ -39,7 +39,15 @@
                    android:textSize="15sp"
                    android:textColor="#ffffff"
                    android:background="@drawable/ripple_effect"/>
-
+                <ImageButton
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/ripple_effect"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_bill"
+                    android:id="@+id/ib_status"
+                    android:layout_toRightOf="@id/txtMain_HelloUser"/>
            </RelativeLayout>
 
        </android.support.v7.widget.Toolbar>
@@ -84,6 +92,7 @@
                 android:layout_centerVertical="true"
                 android:indeterminateDrawable="@drawable/progressdrawable"
                 />
+
         </RelativeLayout>
 
 

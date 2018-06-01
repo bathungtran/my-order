@@ -31,7 +31,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -39,6 +41,7 @@ import javax.net.ssl.HttpsURLConnection;
 import model.OrderModel;
 
 public class BookInfoActivity extends AppCompatActivity {
+    private static String TAG = "BOOK_INFO_ACT";
     private Button order;
     private EditText editName;
     private EditText editPhone;
@@ -46,6 +49,7 @@ public class BookInfoActivity extends AppCompatActivity {
     private EditText editNote;
     private ImageButton btnBack;
     private ProgressDialog progressDialog;
+    private List<OrderModel> menuSave;
     int customerId;
     private static final String ORDER_URL="http://35.189.23.244:8080/order/record";
     @Override
@@ -62,7 +66,7 @@ public class BookInfoActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait...");
         progressDialog.setCancelable(false);
-
+        menuSave = MenuActivity.orderLists;
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +82,8 @@ public class BookInfoActivity extends AppCompatActivity {
     }
     private void getDataFromBill(){
         Intent i = getIntent();
-        customerId = i.getIntExtra("CUSTOMER_ID",0);
+        Bundle bundle = i.getBundleExtra("MENU_LIST");
+        customerId = bundle.getInt("CUSTOMER_ID",0);
         Log.i("CUSTOMER_ID", String.valueOf(customerId));
     }
 
@@ -104,7 +109,7 @@ public class BookInfoActivity extends AppCompatActivity {
        if(isOnline()){
            String listFoodName="";
            for(OrderModel model: MenuActivity.orderLists){
-               listFoodName+=model.getFoodName()+",";
+               listFoodName+=model.getQuantity()+" "+model.getFoodName()+",";
            }
            JSONObject object = new JSONObject();
            try {
@@ -116,15 +121,6 @@ public class BookInfoActivity extends AppCompatActivity {
                 object.put("customerId",customerId);
            } catch (JSONException e) {
                e.printStackTrace();
-           }
-           SharedPreferences pref= getSharedPreferences("ORDERED",MODE_PRIVATE);
-           Gson gson = new Gson();
-           String str = pref.getString("ORDERED","");
-           Log.i("PREFS",str);
-           Type type = new TypeToken<List<OrderModel>>(){}.getType();
-           List<OrderModel> list =  gson.fromJson(str,type);
-           for(int i =0;i<list.size();i++){
-               Log.i("RETRIEVE_PREFS",list.get(i).getFoodName());
            }
 
         showDialog();
@@ -155,10 +151,14 @@ public class BookInfoActivity extends AppCompatActivity {
                                 editName.setText("");
                                 editPhone.setText("");
                                 editNote.setText("");
+
                                 dialog.cancel();
                             }
                         })
                         .show();
+                Intent startMain = new Intent(getApplicationContext(),RestaurantActivity.class);
+                startMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(startMain);
             }else {
                 Toast.makeText(getApplicationContext(),"Order fail! Try again",Toast.LENGTH_LONG).show();
             }

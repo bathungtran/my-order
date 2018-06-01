@@ -1,7 +1,5 @@
 package com.project.myorder;
 
-import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,12 +23,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewAnimator;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,7 +46,7 @@ import utils.DataParser;
 import utils.DownloadURL;
 import utils.GPSTracker;
 
-public class RestaurantActivity extends Activity {
+public class RestaurantActivity extends FragmentActivity {
     ProgressBar progressBar;
     SearchView searchView;
     Toolbar toolbar;
@@ -55,13 +54,15 @@ public class RestaurantActivity extends Activity {
     TextView txtHelloUser;
     Switch swNearBy;
     GPSTracker gpsTracker;
+    ImageButton ibStatus;
     int PROXIMITY_RADIUS = 2000;
     double latitude, longitude;
     private List<HashMap<String, String>> nearbyPlaceList;
     private List<RestaurantModel> restaurantModelList;
     String user;
-    int customerId;
+    private static int customerId;
     NetworkReceiver receiver;
+
     //URL
     private static String serverURL="http://35.189.23.244:8080/";
     private static String API_KEY="AIzaSyBZ8xvu_-TXtnME5l40ACe_A3UwMzQw-64";
@@ -111,9 +112,19 @@ public class RestaurantActivity extends Activity {
             }
         });
         new CustomerId().execute(ORDER_RECORDS+"/"+user);
+        ibStatus = findViewById(R.id.ib_status);
+        ibStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getApplicationContext(),StatusOrderActivity.class);
+                startActivity(intent1);
+            }
+        });
 
     }
-
+    public int getCustomerId(){
+        return customerId;
+    }
     private void InitView() {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
@@ -250,6 +261,7 @@ public class RestaurantActivity extends Activity {
     }
     //logout
     private void ShowLogoutDialog(){
+        this.unregisterReceiver(receiver);
         final AlertDialog.Builder builder = new AlertDialog.Builder(RestaurantActivity.this);
         builder.setMessage("Do you want to logout?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -358,7 +370,7 @@ public class RestaurantActivity extends Activity {
             super.onPostExecute(s);
             CustomerModel customerModel = new Gson().fromJson(s,CustomerModel.class);
             customerId = customerModel.getCustomerId();
-            Log.i("CUSTOMER_ID", String.valueOf(customerId));
+            Log.i("CUSTOMER_ID_USER", String.valueOf(customerId));
         }
 
         @Override

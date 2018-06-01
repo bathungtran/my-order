@@ -3,6 +3,7 @@ package com.project.myorder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import adapter.BillAdapter;
@@ -24,6 +27,7 @@ public class BillActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ListView listView;
     private TextView txtTotal ;
+    Double total = 0.0;
     int customerId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,6 @@ public class BillActivity extends AppCompatActivity {
         btnBack =(ImageButton)findViewById(R.id.btnBill_Back);
         txtTotal =(TextView)findViewById(R.id.txtTotal);
         btnBack.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -43,8 +46,6 @@ public class BillActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.lvOrderList);
         BillAdapter adapter = new BillAdapter(getApplicationContext(), MenuActivity.orderLists);
         listView.setAdapter(adapter);
-        saveOrdered(MenuActivity.orderLists);
-        Double total =0.0;
         for(int i = 0; i< MenuActivity.orderLists.size(); i++){
             total+= MenuActivity.orderLists.get(i).getAmount();
         }
@@ -52,23 +53,15 @@ public class BillActivity extends AppCompatActivity {
         orderSuccess();
     }
 
-    private void saveOrdered(List<OrderModel> saveOrderModel) {
-        SharedPreferences prefs = getSharedPreferences("ORDERED",MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String ordered = gson.toJson(saveOrderModel);
-        Log.i("ORDER_SAVE",ordered);
-        editor.putString("ORDERED",ordered);
-        editor.commit();
-
-    }
 
     private void orderSuccess(){
         mOkBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
                 Intent intent = new Intent(BillActivity.this,BookInfoActivity.class);
-                intent.putExtra("CUSTOMER_ID",customerId);
+                bundle.putInt("CUSTOMER_ID",customerId);
+                intent.putExtra("MENU_LIST",bundle);
                 startActivity(intent);
             }
         });

@@ -18,4 +18,5 @@
     <color name="restaurantitemdividercolor">#bfbfbf</color>
     <color name="buttonripplecolor">#bfbfbf</color>
     <color name="restaurantitemripplecolor">#bfbfbf</color>
+    <color name="status_background">#ffffde</color>
 </resources>

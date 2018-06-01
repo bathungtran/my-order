@@ -3,6 +3,7 @@ package adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class RestaunrantAdapter extends RecyclerView.Adapter<RestaurantViewHolde
 
     @Override
     public void onBindViewHolder(final RestaurantViewHolder holder, int position) {
+        Log.i("TEST_RESTAURANT","OK");
         holder.txtRestaurantName.setText(restaurantModelArrayList.get(position).getResName());
         holder.txtRestaurantAddress.setText(restaurantModelArrayList.get(position).getAddress());
         holder.txtRestaurantDiscription.setText(restaurantModelArrayList.get(position).getDescription());

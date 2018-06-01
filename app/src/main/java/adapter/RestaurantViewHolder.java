@@ -2,6 +2,7 @@ package adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,12 +13,14 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder implements Vie
     TextView txtRestaurantName,txtRestaurantAddress,txtRestaurantDiscription;
     ImageView imgRestaurantLogo;
     ItemClickListener itemClickListener;
+
     public RestaurantViewHolder(View itemView) {
         super(itemView);
         txtRestaurantName = (TextView) itemView.findViewById(R.id.txtRestaurantName);
         txtRestaurantAddress = (TextView) itemView.findViewById(R.id.txtRestaurantAddress);
         txtRestaurantDiscription = (TextView) itemView.findViewById(R.id.txtRestaurantDiscription);
         imgRestaurantLogo = (ImageView) itemView.findViewById(R.id.imgRestaurantLogo);
+
         itemView.setOnClickListener(this);
     }
 
