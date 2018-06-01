@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/BackgroundColor"
-    tools:context="com.project.myorder.BookInfoActivity">
+    tools:context="com.project.myorder.BookInfoActivity"
+    android:background="@color/BackgroundColor">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -51,14 +51,15 @@
                android:textSize="20dp"/>
 
            <EditText
+               android:backgroundTintMode="multiply"
+               android:id="@+id/edt_info_name"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="75dp"
                android:layout_marginBottom="15dp"
-               android:textSize="20dp"
+               android:layout_marginLeft="75dp"
+               android:linksClickable="true"
                android:textColor="@color/colorPrimary"
-               android:id="@+id/edt_info_name"
-               android:singleLine="true" />
+               android:textSize="20dp" />
        </LinearLayout>
 
        <LinearLayout
@@ -72,16 +73,18 @@
                android:text="Phone number"
                android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
+
            <EditText
+               android:backgroundTintMode="multiply"
+               android:id="@+id/edt_info_phone"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="10dp"
                android:layout_marginBottom="15dp"
-               android:textSize="20dp"
-               android:textColor="@color/colorPrimary"
+               android:layout_marginLeft="10dp"
+               android:inputType="numberDecimal"
                android:singleLine="true"
-               android:id="@+id/edt_info_phone"
-               android:inputType="numberDecimal"/>
+               android:textColor="@color/colorPrimary"
+               android:textSize="20dp" />
        </LinearLayout>
 
 
@@ -97,6 +100,7 @@
                android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
            <EditText
+               android:backgroundTintMode="multiply"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginBottom="15dp"
@@ -118,15 +122,17 @@
                android:text="Note"
                android:textColor="@color/colorPrimary"
                android:textSize="20dp"/>
+
            <EditText
+               android:backgroundTintMode="multiply"
+               android:id="@+id/edt_info_note"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_marginBottom="15dp"
                android:layout_marginLeft="100dp"
-               android:textSize="20dp"
+               android:maxLength="84"
                android:textColor="@color/colorPrimary"
-               android:id="@+id/edt_info_note"
-               android:maxLength="84"/>
+               android:textSize="20dp" />
        </LinearLayout>
    </LinearLayout>
 

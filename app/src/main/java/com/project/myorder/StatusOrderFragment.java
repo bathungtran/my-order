@@ -4,10 +4,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,6 +56,12 @@ public class StatusOrderFragment extends android.support.v4.app.Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoratio = new DividerItemDecoration(context,
+                DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.restaurant_item_divider);
+        recyclerView.addItemDecoration(dividerItemDecoratio);
+        dividerItemDecoratio.setDrawable(drawable);
+
         return  view;
     }
 
